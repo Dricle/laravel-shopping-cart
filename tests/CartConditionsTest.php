@@ -1,6 +1,5 @@
 <?php
 
-
 use Dricle\Cart\Cart;
 use Dricle\Cart\CartCondition;
 use Dricle\Tests\Helpers\SessionMock;
