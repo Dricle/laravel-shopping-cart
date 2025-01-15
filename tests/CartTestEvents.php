@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: darryl
@@ -6,20 +7,17 @@
  * Time: 3:20 PM
  */
 
-use Darryldecode\Cart\Cart;
+use Dricle\Cart\Cart;
+use Dricle\Tests\Helpers\SessionMock;
 use Mockery as m;
 
-require_once __DIR__.'/helpers/SessionMock.php';
-
-class CartTestEvents extends PHPUnit\Framework\TestCase {
-
+class CartTestEvents extends PHPUnit\Framework\TestCase
+{
     const CART_INSTANCE_NAME = 'shopping';
 
-    public function setUp(): void
-    {
-    }
+    protected function setUp(): void {}
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         m::close();
     }
@@ -30,11 +28,11 @@ class CartTestEvents extends PHPUnit\Framework\TestCase {
         $events->shouldReceive('dispatch')->once()->with(self::CART_INSTANCE_NAME.'.created', m::type('array'), true);
 
         $cart = new Cart(
-            new SessionMock(),
+            new SessionMock,
             $events,
             self::CART_INSTANCE_NAME,
             'SAMPLESESSIONKEY',
-            require(__DIR__.'/helpers/configMock.php')
+            require (__DIR__.'/helpers/configMock.php')
         );
 
         $this->assertTrue(true);
@@ -48,14 +46,14 @@ class CartTestEvents extends PHPUnit\Framework\TestCase {
         $events->shouldReceive('dispatch')->once()->with(self::CART_INSTANCE_NAME.'.added', m::type('array'), true);
 
         $cart = new Cart(
-            new SessionMock(),
+            new SessionMock,
             $events,
             self::CART_INSTANCE_NAME,
             'SAMPLESESSIONKEY',
-            require(__DIR__.'/helpers/configMock.php')
+            require (__DIR__.'/helpers/configMock.php')
         );
 
-        $cart->add(455, 'Sample Item', 100.99, 2, array());
+        $cart->add(455, 'Sample Item', 100.99, 2, []);
 
         $this->assertTrue(true);
     }
@@ -68,15 +66,15 @@ class CartTestEvents extends PHPUnit\Framework\TestCase {
         $events->shouldReceive('dispatch')->times(2)->with(self::CART_INSTANCE_NAME.'.added', m::type('array'), true);
 
         $cart = new Cart(
-            new SessionMock(),
+            new SessionMock,
             $events,
             self::CART_INSTANCE_NAME,
             'SAMPLESESSIONKEY',
-            require(__DIR__.'/helpers/configMock.php')
+            require (__DIR__.'/helpers/configMock.php')
         );
 
-        $cart->add(455, 'Sample Item 1', 100.99, 2, array());
-        $cart->add(562, 'Sample Item 2', 100.99, 2, array());
+        $cart->add(455, 'Sample Item 1', 100.99, 2, []);
+        $cart->add(562, 'Sample Item 2', 100.99, 2, []);
 
         $this->assertTrue(true);
     }
@@ -88,36 +86,36 @@ class CartTestEvents extends PHPUnit\Framework\TestCase {
         $events->shouldReceive('dispatch')->times(3)->with(self::CART_INSTANCE_NAME.'.adding', m::type('array'), true);
         $events->shouldReceive('dispatch')->times(3)->with(self::CART_INSTANCE_NAME.'.added', m::type('array'), true);
 
-        $items = array(
-            array(
+        $items = [
+            [
                 'id' => 456,
                 'name' => 'Sample Item 1',
                 'price' => 67.99,
                 'quantity' => 4,
-                'attributes' => array()
-            ),
-            array(
+                'attributes' => [],
+            ],
+            [
                 'id' => 568,
                 'name' => 'Sample Item 2',
                 'price' => 69.25,
                 'quantity' => 4,
-                'attributes' => array()
-            ),
-            array(
+                'attributes' => [],
+            ],
+            [
                 'id' => 856,
                 'name' => 'Sample Item 3',
                 'price' => 50.25,
                 'quantity' => 4,
-                'attributes' => array()
-            ),
-        );
+                'attributes' => [],
+            ],
+        ];
 
         $cart = new Cart(
-            new SessionMock(),
+            new SessionMock,
             $events,
             self::CART_INSTANCE_NAME,
             'SAMPLESESSIONKEY',
-            require(__DIR__.'/helpers/configMock.php')
+            require (__DIR__.'/helpers/configMock.php')
         );
 
         $cart->add($items);
@@ -134,36 +132,36 @@ class CartTestEvents extends PHPUnit\Framework\TestCase {
         $events->shouldReceive('dispatch')->times(1)->with(self::CART_INSTANCE_NAME.'.removing', m::type('array'), true);
         $events->shouldReceive('dispatch')->times(1)->with(self::CART_INSTANCE_NAME.'.removed', m::type('array'), true);
 
-        $items = array(
-            array(
+        $items = [
+            [
                 'id' => 456,
                 'name' => 'Sample Item 1',
                 'price' => 67.99,
                 'quantity' => 4,
-                'attributes' => array()
-            ),
-            array(
+                'attributes' => [],
+            ],
+            [
                 'id' => 568,
                 'name' => 'Sample Item 2',
                 'price' => 69.25,
                 'quantity' => 4,
-                'attributes' => array()
-            ),
-            array(
+                'attributes' => [],
+            ],
+            [
                 'id' => 856,
                 'name' => 'Sample Item 3',
                 'price' => 50.25,
                 'quantity' => 4,
-                'attributes' => array()
-            ),
-        );
+                'attributes' => [],
+            ],
+        ];
 
         $cart = new Cart(
-            new SessionMock(),
+            new SessionMock,
             $events,
             self::CART_INSTANCE_NAME,
             'SAMPLESESSIONKEY',
-            require(__DIR__.'/helpers/configMock.php')
+            require (__DIR__.'/helpers/configMock.php')
         );
 
         $cart->add($items);
@@ -182,36 +180,36 @@ class CartTestEvents extends PHPUnit\Framework\TestCase {
         $events->shouldReceive('dispatch')->once()->with(self::CART_INSTANCE_NAME.'.clearing', m::type('array'), true);
         $events->shouldReceive('dispatch')->once()->with(self::CART_INSTANCE_NAME.'.cleared', m::type('array'), true);
 
-        $items = array(
-            array(
+        $items = [
+            [
                 'id' => 456,
                 'name' => 'Sample Item 1',
                 'price' => 67.99,
                 'quantity' => 4,
-                'attributes' => array()
-            ),
-            array(
+                'attributes' => [],
+            ],
+            [
                 'id' => 568,
                 'name' => 'Sample Item 2',
                 'price' => 69.25,
                 'quantity' => 4,
-                'attributes' => array()
-            ),
-            array(
+                'attributes' => [],
+            ],
+            [
                 'id' => 856,
                 'name' => 'Sample Item 3',
                 'price' => 50.25,
                 'quantity' => 4,
-                'attributes' => array()
-            ),
-        );
+                'attributes' => [],
+            ],
+        ];
 
         $cart = new Cart(
-            new SessionMock(),
+            new SessionMock,
             $events,
             self::CART_INSTANCE_NAME,
             'SAMPLESESSIONKEY',
-            require(__DIR__.'/helpers/configMock.php')
+            require (__DIR__.'/helpers/configMock.php')
         );
 
         $cart->add($items);

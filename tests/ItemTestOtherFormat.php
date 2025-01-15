@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: darryl
@@ -6,41 +7,39 @@
  * Time: 6:17 PM
  */
 
-use Darryldecode\Cart\Cart;
+use Dricle\Cart\Cart;
+use Dricle\Tests\Helpers\SessionMock;
 use Mockery as m;
-
-require_once __DIR__.'/helpers/SessionMock.php';
 
 class ItemTestOtherFormat extends PHPUnit\Framework\TestCase
 {
-
     /**
-     * @var Darryldecode\Cart\Cart
+     * @var Dricle\Cart\Cart
      */
     protected $cart;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $events = m::mock('Illuminate\Contracts\Events\Dispatcher');
         $events->shouldReceive('dispatch');
 
         $this->cart = new Cart(
-            new SessionMock(),
+            new SessionMock,
             $events,
             'shopping',
             'SAMPLESESSIONKEY',
-            require(__DIR__.'/helpers/configMockOtherFormat.php')
+            require (__DIR__.'/helpers/configMockOtherFormat.php')
         );
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         m::close();
     }
 
     public function test_item_get_sum_price_using_property()
     {
-        $this->cart->add(455, 'Sample Item', 100.99, 2, array());
+        $this->cart->add(455, 'Sample Item', 100.99, 2, []);
 
         $item = $this->cart->get(455);
 
@@ -49,7 +48,7 @@ class ItemTestOtherFormat extends PHPUnit\Framework\TestCase
 
     public function test_item_get_sum_price_using_array_style()
     {
-        $this->cart->add(455, 'Sample Item', 100.99, 2, array());
+        $this->cart->add(455, 'Sample Item', 100.99, 2, []);
 
         $item = $this->cart->get(455);
 

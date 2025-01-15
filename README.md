@@ -1,7 +1,7 @@
 # Laravel 5 & 6 , 7 & 9 Shopping Cart
-[![Build Status](https://travis-ci.org/darryldecode/laravelshoppingcart.svg?branch=master)](https://travis-ci.org/darryldecode/laravelshoppingcart)
-[![Total Downloads](https://poser.pugx.org/darryldecode/cart/d/total.svg)](https://packagist.org/packages/darryldecode/cart)
-[![License](https://poser.pugx.org/darryldecode/cart/license.svg)](https://packagist.org/packages/darryldecode/cart)
+[![Build Status](https://travis-ci.org/Dricle/laravelshoppingcart.svg?branch=master)](https://travis-ci.org/Dricle/laravelshoppingcart)
+[![Total Downloads](https://poser.pugx.org/Dricle/cart/d/total.svg)](https://packagist.org/packages/Dricle/cart)
+[![License](https://poser.pugx.org/Dricle/cart/license.svg)](https://packagist.org/packages/Dricle/cart)
 
 A Shopping Cart Implementation for Laravel Framework
 
@@ -9,38 +9,38 @@ A Shopping Cart Implementation for Laravel Framework
 
 Demo: https://shoppingcart-demo.darrylfernandez.com/cart
 
-Git repo of the demo: https://github.com/darryldecode/laravelshoppingcart-demo
+Git repo of the demo: https://github.com/Dricle/laravelshoppingcart-demo
 
 ## INSTALLATION
 
 Install the package through [Composer](http://getcomposer.org/).
 
 For Laravel 5.1~:
-`composer require "darryldecode/cart:~2.0"`
+`composer require "Dricle/cart:~2.0"`
 
 For Laravel 5.5, 5.6, or 5.7~, 9:
 
-```composer require "darryldecode/cart:~4.0"``` or 
-```composer require "darryldecode/cart"```
+```composer require "Dricle/cart:~4.0"``` or
+```composer require "Dricle/cart"```
 
 ## CONFIGURATION
 
 1. Open config/app.php and add this line to your Service Providers Array.
 
 ```php
-Darryldecode\Cart\CartServiceProvider::class
+Dricle\Cart\CartServiceProvider::class
 ```
 
 2. Open config/app.php and add this line to your Aliases
 
 ```php
-  'Cart' => Darryldecode\Cart\Facades\CartFacade::class
+  'Cart' => Dricle\Cart\Facades\CartFacade::class
 ```
 
 3. Optional configuration file (useful if you plan to have full control)
 
 ```php
-php artisan vendor:publish --provider="Darryldecode\Cart\CartServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Dricle\Cart\CartServiceProvider" --tag="config"
 ```
 
 ## HOW TO USE
@@ -94,7 +94,7 @@ foreach($items as $row) {
 	echo $row->name;
 	echo $row->qty;
 	echo $row->price;
-	
+
 	echo $item->associatedModel->id; // whatever properties your model have
         echo $item->associatedModel->name; // whatever properties your model have
         echo $item->associatedModel->description; // whatever properties your model have
@@ -158,11 +158,11 @@ There are several ways you can add items on your cart, see below:
  # ALWAYS REMEMBER TO BIND THE CART TO A USER BEFORE CALLING ANY CART FUNCTION
  # SO CART WILL KNOW WHO'S CART DATA YOU WANT TO MANIPULATE. SEE IMPORTANT NOTICE ABOVE.
  # EXAMPLE: \Cart::session($userId); then followed by cart normal usage.
- 
+
  # NOTE:
  # the 'id' field in adding a new item on cart is not intended for the Model ID (example Product ID)
- # instead make sure to put a unique ID for every unique product or product that has it's own unique prirce, 
- # because it is used for updating cart and how each item on cart are segregated during calculation and quantities. 
+ # instead make sure to put a unique ID for every unique product or product that has it's own unique prirce,
+ # because it is used for updating cart and how each item on cart are segregated during calculation and quantities.
  # You can put the model_id instead as an attribute for full flexibility.
  # Example is that if you want to add same products on the cart but with totally different attribute and price.
  # If you use the Product's ID as the 'id' field in cart, it will result to increase in quanity instead
@@ -450,7 +450,7 @@ by adding 'order' parameter in CartCondition.
 ```php
 
 // add single condition on a cart bases
-$condition = new \Darryldecode\Cart\CartCondition(array(
+$condition = new \Dricle\Cart\CartCondition(array(
     'name' => 'VAT 12.5%',
     'type' => 'tax',
     'target' => 'subtotal', // this condition will be applied to cart's subtotal when getSubTotal() is called.
@@ -465,14 +465,14 @@ Cart::condition($condition);
 Cart::session($userId)->condition($condition); // for a speicifc user's cart
 
 // or add multiple conditions from different condition instances
-$condition1 = new \Darryldecode\Cart\CartCondition(array(
+$condition1 = new \Dricle\Cart\CartCondition(array(
     'name' => 'VAT 12.5%',
     'type' => 'tax',
     'target' => 'subtotal', // this condition will be applied to cart's subtotal when getSubTotal() is called.
     'value' => '12.5%',
     'order' => 2
 ));
-$condition2 = new \Darryldecode\Cart\CartCondition(array(
+$condition2 = new \Dricle\Cart\CartCondition(array(
     'name' => 'Express Shipping $15',
     'type' => 'shipping',
     'target' => 'subtotal', // this condition will be applied to cart's subtotal when getSubTotal() is called.
@@ -486,7 +486,7 @@ Cart::condition($condition2);
 // will also be affected as getTotal() depends in getSubTotal() which is the subtotal.
 
 // add condition to only apply on totals, not in subtotal
-$condition = new \Darryldecode\Cart\CartCondition(array(
+$condition = new \Dricle\Cart\CartCondition(array(
     'name' => 'Express Shipping $15',
     'type' => 'shipping',
     'target' => 'total', // this condition will be applied to cart's total when getTotal() is called.
@@ -552,7 +552,7 @@ Now let's add condition on an item.
 ```php
 
 // lets create first our condition instance
-$saleCondition = new \Darryldecode\Cart\CartCondition(array(
+$saleCondition = new \Dricle\Cart\CartCondition(array(
             'name' => 'SALE 5%',
             'type' => 'tax',
             'value' => '-5%',
@@ -572,7 +572,7 @@ $product = array(
 Cart::add($product);
 
 // you may also add multiple condition on an item
-$itemCondition1 = new \Darryldecode\Cart\CartCondition(array(
+$itemCondition1 = new \Dricle\Cart\CartCondition(array(
     'name' => 'SALE 5%',
     'type' => 'sale',
     'value' => '-5%',
@@ -582,7 +582,7 @@ $itemCondition2 = new CartCondition(array(
     'type' => 'promo',
     'value' => '-25',
 ));
-$itemCondition3 = new \Darryldecode\Cart\CartCondition(array(
+$itemCondition3 = new \Dricle\Cart\CartCondition(array(
     'name' => 'MISC',
     'type' => 'misc',
     'value' => '+10',
@@ -846,7 +846,7 @@ $this->app['wishlist'] = $this->app->share(function($app)
 		});
 
 // for 5.4 or newer
-use Darryldecode\Cart\Cart;
+use Dricle\Cart\Cart;
 use Illuminate\Support\ServiceProvider;
 
 class WishListProvider extends ServiceProvider
@@ -886,7 +886,7 @@ class WishListProvider extends ServiceProvider
 ```
 
 IF you are having problem with multiple cart instance, please see the codes on
-this demo repo here: [DEMO](https://github.com/darryldecode/laravelshoppingcart-demo)
+this demo repo here: [DEMO](https://github.com/Dricle/laravelshoppingcart-demo)
 
 ## Exceptions
 
@@ -1136,14 +1136,14 @@ class DBStorage {
 }
 ```
 
-For example you can also leverage Laravel's Caching (redis, memcached, file, dynamo, etc) using the example below. Example also includes cookie persistance, so that cart would be still available for 30 days. Sessions by default persists only 20 minutes. 
+For example you can also leverage Laravel's Caching (redis, memcached, file, dynamo, etc) using the example below. Example also includes cookie persistance, so that cart would be still available for 30 days. Sessions by default persists only 20 minutes.
 
 ```php
 namespace App\Cart;
 
 use Carbon\Carbon;
 use Cookie;
-use Darryldecode\Cart\CartCollection;
+use Dricle\Cart\CartCollection;
 
 class CacheStorage
 {
@@ -1186,7 +1186,7 @@ class CacheStorage
 
 To make this the cart's default storage, let's update the cart's configuration file.
 First, let us publish first the cart config file for us to enable to override it.
-`php artisan vendor:publish --provider="Darryldecode\Cart\CartServiceProvider" --tag="config"`
+`php artisan vendor:publish --provider="Dricle\Cart\CartServiceProvider" --tag="config"`
 
 after running that command, there should be a new file on your config folder name `shopping_cart.php`
 
@@ -1199,7 +1199,7 @@ to your cart instance by injecting it to the service provider of your wishlist c
 to use your custom storage. See below:
 
 ```php
-use Darryldecode\Cart\Cart;
+use Dricle\Cart\Cart;
 use Illuminate\Support\ServiceProvider;
 
 class WishListProvider extends ServiceProvider
@@ -1246,7 +1246,7 @@ as a guide & reference. See links below:
 
 OR
 
-[See Demo App Repo Here](https://github.com/darryldecode/laravelshoppingcart-demo)
+[See Demo App Repo Here](https://github.com/Dricle/laravelshoppingcart-demo)
 
 ## License
 

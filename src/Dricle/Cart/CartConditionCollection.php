@@ -1,4 +1,6 @@
-<?php namespace Darryldecode\Cart;
+<?php
+
+namespace Dricle\Cart;
 
 /**
  * Created by PhpStorm.
@@ -9,6 +11,4 @@
 
 use Illuminate\Support\Collection;
 
-class CartConditionCollection extends Collection {
-
-}
+class CartConditionCollection extends Collection {}
