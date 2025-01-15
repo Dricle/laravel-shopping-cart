@@ -28,7 +28,12 @@ class ItemTestOtherFormat extends PHPUnit\Framework\TestCase
             $events,
             'shopping',
             'SAMPLESESSIONKEY',
-            require (__DIR__.'/helpers/configMockOtherFormat.php')
+            [
+                'format_numbers' => true,
+                'decimals' => 3,
+                'dec_point' => ',',
+                'thousands_sep' => '.',
+            ]
         );
     }
 

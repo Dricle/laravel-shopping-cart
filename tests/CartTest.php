@@ -1,14 +1,7 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: darryl
- * Date: 1/12/2015
- * Time: 9:59 PM
- */
-
 use Dricle\Cart\Cart;
-use Dricle\Tests\helpers\MockProduct;
+use Dricle\Tests\Helpers\MockProduct;
 use Dricle\Tests\Helpers\SessionMock;
 use Mockery as m;
 
