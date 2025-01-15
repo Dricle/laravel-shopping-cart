@@ -6,7 +6,7 @@ use Dricle\Cart\CartCondition;
 use Dricle\Tests\Helpers\SessionMock;
 use Mockery as m;
 
-class CartConditionTest extends PHPUnit\Framework\TestCase
+class CartConditionsTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Dricle\Cart\Cart

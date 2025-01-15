@@ -69,6 +69,14 @@ class Cart
      */
     protected $currentItemId;
 
+
+    /**
+     * the number of decimals to use
+     *
+     * @var
+     */
+    protected $decimals;
+
     /**
      * our object constructor
      *

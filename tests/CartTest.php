@@ -22,7 +22,12 @@ class CartTest extends PHPUnit\Framework\TestCase
             $events,
             'shopping',
             'SAMPLESESSIONKEY',
-            require (__DIR__.'/helpers/configMock.php')
+            [
+                'format_numbers' => true,
+                'decimals' => 2,
+                'dec_point' => '.',
+                'thousands_sep' => ' ',
+            ]
         );
     }
 
