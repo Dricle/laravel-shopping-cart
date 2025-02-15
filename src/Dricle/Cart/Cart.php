@@ -233,18 +233,10 @@ class Cart
 
         $cart = $this->getContent();
 
-        $item = $cart->pull($id);
+        $item = $cart->get($id);
 
         foreach ($data as $key => $value) {
-            // if the key is currently "quantity" we will need to check if an arithmetic
-            // symbol is present so we can decide if the update of quantity is being added
-            // or being reduced.
             if ($key == 'quantity') {
-                // we will check if quantity value provided is array,
-                // if it is, we will need to check if a key "relative" is set
-                // and we will evaluate its value if true or false,
-                // this tells us how to treat the quantity value if it should be updated
-                // relatively to its current quantity value or just totally replace the value
                 if (is_array($value)) {
                     if (isset($value['relative'])) {
                         if ((bool) $value['relative']) {
@@ -263,6 +255,7 @@ class Cart
             }
         }
 
+        // Without changing the order
         $cart->put($id, $item);
 
         $this->save($cart);
@@ -669,9 +662,11 @@ class Cart
      */
     public function getContent()
     {
-        return (new CartCollection($this->session->get($this->sessionKeyCartItems)))->reject(function ($item) {
-            return ! ($item instanceof ItemCollection);
-        });
+        return (new CartCollection($this->session->get($this->sessionKeyCartItems)))
+            ->reject(function ($item) {
+                return ! ($item instanceof ItemCollection);
+            })
+            ->sortKeys();
     }
 
     /**
